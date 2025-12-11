@@ -43,16 +43,59 @@ try
     // Transform to SSMS22 format
     var registeredServers = TransformToSsms22(dataSource);
 
-    // Serialize to XML
-    Console.WriteLine($"Writing destination file: {destinationFile}");
+    // Serialize RegisteredServers to XML string
+    Console.WriteLine("Serializing RegisteredServers to XML...");
+    string registeredServersXml;
     var xmlSerializer = new XmlSerializer(typeof(RegisteredServers));
-    using (var writer = new StreamWriter(destinationFile))
+    using (var stringWriter = new StringWriter())
     {
-        xmlSerializer.Serialize(writer, registeredServers);
+        xmlSerializer.Serialize(stringWriter, registeredServers);
+        registeredServersXml = stringWriter.ToString();
+        
+        // Remove XML declaration from the serialized content
+        if (registeredServersXml.StartsWith("<?xml"))
+        {
+            var firstLineEnd = registeredServersXml.IndexOf("?>") + 2;
+            registeredServersXml = registeredServersXml.Substring(firstLineEnd).TrimStart();
+        }
     }
+
+    // Load template.xml
+    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "template.xml");
+    if (!File.Exists(templatePath))
+    {
+        // Try relative to source file location
+        templatePath = Path.Combine(Path.GetDirectoryName(sourceFile) ?? ".", "template.xml");
+        if (!File.Exists(templatePath))
+        {
+            // Try current directory
+            templatePath = "template.xml";
+            if (!File.Exists(templatePath))
+            {
+                Console.WriteLine("Error: template.xml not found. Please ensure template.xml exists in the application directory.");
+                return 1;
+            }
+        }
+    }
+
+    Console.WriteLine($"Loading template from: {templatePath}");
+    string template = File.ReadAllText(templatePath);
+
+    // Generate a new GUID for this registration
+    string uuid = Guid.NewGuid().ToString();
+
+    // Replace placeholders in template
+    string outputXml = template
+        .Replace("{{uuid}}", uuid)
+        .Replace("{{RegisteredServers:bufferData}}", registeredServersXml);
+
+    // Write destination file
+    Console.WriteLine($"Writing destination file: {destinationFile}");
+    File.WriteAllText(destinationFile, outputXml);
 
     Console.WriteLine("Transformation completed successfully!");
     Console.WriteLine($"Output saved to: {destinationFile}");
+    Console.WriteLine($"Generated UUID: {uuid}");
     return 0;
 }
 catch (JsonException ex)

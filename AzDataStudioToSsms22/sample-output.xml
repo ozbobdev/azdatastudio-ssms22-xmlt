@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RegisteredServers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<model xmlns="urn:x-model" name="urn:uuid:f2352a7c-61eb-4ae3-8c63-ec0a8f63cd99">
+  <identity>
+    <name>urn:uuid:f2352a7c-61eb-4ae3-8c63-ec0a8f63cd99</name>
+    <baseURI>RegisteredServers.xml</baseURI>
+  </identity>
+  <element name="RegisteredServers.RegisteredServers.RegisteredServers">
+    <urn:bufferData xmlns:urn="urn:x-bufferData"><RegisteredServers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ServerGroup name="Production" description="Production servers">
     <RegisteredServer name="Production SQL Server" serverName="prod-sql-01.company.com" description="Database: ProductionDB" serverType="DatabaseEngine" authType="SQL Server Authentication" loginName="sa" />
   </ServerGroup>
@@ -9,4 +15,6 @@
     </ServerGroup>
     <RegisteredServer name="Development SQL Server" serverName="dev-sql-01.company.com" description="Database: DevDB" serverType="DatabaseEngine" authType="Windows Authentication" />
   </ServerGroup>
-</RegisteredServers>
+</RegisteredServers></urn:bufferData>
+  </element>
+</model>
