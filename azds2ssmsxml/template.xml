@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<model xmlns="http://schemas.serviceml.org/smlif/2007/02">
+	<identity>
+		<name>urn:uuid:{{outputuuid}}</name>
+		<baseURI>http://documentcollection/</baseURI>
+	</identity>
+	<xs:bufferSchema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+		<definitions xmlns:sfc="http://schemas.microsoft.com/sqlserver/sfc/serialization/2007/08">
+			<document>
+				<docinfo>
+					<aliases>
+						<alias>/system/schema/RegisteredServers</alias>
+					</aliases>
+					<sfc:version DomainVersion="1" />
+				</docinfo>
+				<data>
+					<xs:schema targetNamespace="http://schemas.microsoft.com/sqlserver/RegisteredServers/2007/08" xmlns:sfc="http://schemas.microsoft.com/sqlserver/sfc/serialization/2007/08" xmlns:sml="http://schemas.serviceml.org/sml/2007/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+						<xs:element name="ServerGroup">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:any namespace="http://schemas.microsoft.com/sqlserver/RegisteredServers/2007/08" processContents="skip" minOccurs="0" maxOccurs="unbounded" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RegisteredServer">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:any namespace="http://schemas.microsoft.com/sqlserver/RegisteredServers/2007/08" processContents="skip" minOccurs="0" maxOccurs="unbounded" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						{{RegisteredServers:bufferData}}
+					</xs:schema>
+				</data>
+			</document>
+		</definitions>
+	</xs:bufferSchema>
+</model>
