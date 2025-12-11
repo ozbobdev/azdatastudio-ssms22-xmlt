@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RegisteredServers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ServerGroup name="Production" description="Production servers">
+    <RegisteredServer name="Production SQL Server" serverName="prod-sql-01.company.com" description="Database: ProductionDB" serverType="DatabaseEngine" authType="SQL Server Authentication" loginName="sa" />
+  </ServerGroup>
+  <ServerGroup name="Development" description="Development servers">
+    <ServerGroup name="Testing" description="Testing environment servers">
+      <RegisteredServer name="Test SQL Server" serverName="test-sql-01.company.com" description="Database: TestDB" serverType="DatabaseEngine" authType="SQL Server Authentication" loginName="testuser" />
+    </ServerGroup>
+    <RegisteredServer name="Development SQL Server" serverName="dev-sql-01.company.com" description="Database: DevDB" serverType="DatabaseEngine" authType="Windows Authentication" />
+  </ServerGroup>
+</RegisteredServers>

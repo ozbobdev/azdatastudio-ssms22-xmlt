@@ -1,0 +1,78 @@
+{
+  "connectionGroups": [
+    {
+      "name": "Production",
+      "id": "prod-group-1",
+      "parentId": null,
+      "color": "#FF0000",
+      "description": "Production servers"
+    },
+    {
+      "name": "Development",
+      "id": "dev-group-1",
+      "parentId": null,
+      "color": "#00FF00",
+      "description": "Development servers"
+    },
+    {
+      "name": "Testing",
+      "id": "test-group-1",
+      "parentId": "dev-group-1",
+      "description": "Testing environment servers"
+    }
+  ],
+  "connections": [
+    {
+      "groupId": "prod-group-1",
+      "providerName": "MSSQL",
+      "savePassword": false,
+      "id": "conn-1",
+      "options": {
+        "connectionName": "Production SQL Server",
+        "server": "prod-sql-01.company.com",
+        "database": "ProductionDB",
+        "authenticationType": "SqlLogin",
+        "user": "sa",
+        "applicationName": "Azure Data Studio",
+        "connectTimeout": 30,
+        "originalDatabase": "ProductionDB",
+        "groupId": "prod-group-1",
+        "databaseDisplayName": "Production Database"
+      }
+    },
+    {
+      "groupId": "dev-group-1",
+      "providerName": "MSSQL",
+      "savePassword": false,
+      "id": "conn-2",
+      "options": {
+        "connectionName": "Development SQL Server",
+        "server": "dev-sql-01.company.com",
+        "database": "DevDB",
+        "authenticationType": "Integrated",
+        "applicationName": "Azure Data Studio",
+        "connectTimeout": 15,
+        "originalDatabase": "DevDB",
+        "groupId": "dev-group-1",
+        "databaseDisplayName": "Development Database"
+      }
+    },
+    {
+      "groupId": "test-group-1",
+      "providerName": "MSSQL",
+      "savePassword": false,
+      "id": "conn-3",
+      "options": {
+        "connectionName": "Test SQL Server",
+        "server": "test-sql-01.company.com",
+        "database": "TestDB",
+        "authenticationType": "SqlLogin",
+        "user": "testuser",
+        "applicationName": "Azure Data Studio",
+        "connectTimeout": 15,
+        "groupId": "test-group-1",
+        "databaseDisplayName": "Test Database"
+      }
+    }
+  ]
+}
