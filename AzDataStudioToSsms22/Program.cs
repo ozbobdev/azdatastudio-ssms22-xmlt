@@ -55,8 +55,11 @@ try
         // Remove XML declaration from the serialized content
         if (registeredServersXml.StartsWith("<?xml"))
         {
-            var firstLineEnd = registeredServersXml.IndexOf("?>") + 2;
-            registeredServersXml = registeredServersXml.Substring(firstLineEnd).TrimStart();
+            var declarationEnd = registeredServersXml.IndexOf("?>");
+            if (declarationEnd != -1)
+            {
+                registeredServersXml = registeredServersXml.Substring(declarationEnd + 2).TrimStart();
+            }
         }
     }
 
@@ -65,11 +68,16 @@ try
     if (!File.Exists(templatePath))
     {
         // Try relative to source file location
-        templatePath = Path.Combine(Path.GetDirectoryName(sourceFile) ?? ".", "template.xml");
+        var sourceDir = Path.GetDirectoryName(sourceFile);
+        if (!string.IsNullOrEmpty(sourceDir))
+        {
+            templatePath = Path.Combine(sourceDir, "template.xml");
+        }
+        
         if (!File.Exists(templatePath))
         {
             // Try current directory
-            templatePath = "template.xml";
+            templatePath = Path.Combine(Directory.GetCurrentDirectory(), "template.xml");
             if (!File.Exists(templatePath))
             {
                 Console.WriteLine("Error: template.xml not found. Please ensure template.xml exists in the application directory.");
