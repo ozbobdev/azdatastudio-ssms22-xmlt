@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model xmlns="urn:x-model" name="urn:uuid:{{uuid}}">
+  <identity>
+    <name>urn:uuid:{{uuid}}</name>
+    <baseURI>RegisteredServers.xml</baseURI>
+  </identity>
+  <element name="RegisteredServers.RegisteredServers.RegisteredServers">
+    <urn:bufferData xmlns:urn="urn:x-bufferData">{{RegisteredServers:bufferData}}</urn:bufferData>
+  </element>
+</model>
